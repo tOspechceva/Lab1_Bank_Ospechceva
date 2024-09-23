@@ -16,9 +16,11 @@ package bank.entity;
 
 public class BankAtm {
     private Long id;
-
     private String name;
-    private String address;  // Адрес банкомата совпадает с адресом офиса банка
+
+    private Bank bank;  // Банк, которому принадлежит банкомат
+    private BankOffice bankOffice; // Офис, к которому принадлежит банкомат
+
     private String status;  // Возможные значения: "Работает", "Не работает", "Нет денег"
     private String location;  // Локация (внутри банковского офиса)
     private Employee servicingEmployee;  // Обслуживающий сотрудник
@@ -27,10 +29,27 @@ public class BankAtm {
     private boolean canAcceptMoney;    // Можно ли внести деньги?
     private double moneyInAtm;         // Количество денег в банкомате
     private double serviceCost;        // Стоимость обслуживания банкомата
-    private Bank bank;  // Банк, которому принадлежит банкомат
+
 
     // Конструктор
     public BankAtm() {
+    }
+
+    public BankAtm(Long id, String name, Bank bank, BankOffice bankOffice, String status,
+                   String location,Employee servicingEmployee, boolean canDispenseMoney,
+                   boolean canAcceptMoney, double moneyInAtm, double serviceCost) {
+        this.setId(id);
+        this.setName(name);
+        this.setBank(bank);
+        this.setBankOffice(bankOffice);
+        this.setServiceCost(serviceCost);
+        this.setStatus(status);
+        this.setServicingEmployee(servicingEmployee);
+        this.setCanAcceptMoney(canAcceptMoney);
+        this.setCanDispenseMoney(canDispenseMoney);
+        this.setServiceCost(serviceCost);
+        this.setMoneyInAtm(moneyInAtm);
+        this.setLocation(location);
     }
 
     // Геттеры и сеттеры
@@ -50,12 +69,17 @@ public class BankAtm {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public BankOffice getBankOffice() {
+        return bankOffice;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setBankOffice(BankOffice bankOffice) {
+        this.bankOffice = bankOffice;
+        this.bankOffice.addAtmCount();
+    }
+
+    public String getAddress() {
+        return bankOffice.getAddress();
     }
 
     public String getStatus() {
@@ -66,7 +90,7 @@ public class BankAtm {
         if (status.equals("Работает") || status.equals("Не работает") || status.equals("Нет денег"))
             this.status = status;
         else
-            System.out.println("The status is not correct");
+            System.out.println("The status is not correct in the bank atm");
     }
 
     public String getLocation() {
@@ -128,4 +152,19 @@ public class BankAtm {
     public void setBank(Bank bank) {
         this.bank = bank;
     }
+
+    public void printBankAtm() {
+        System.out.println("Bank ATM" + name);
+        System.out.println("id: " + id);
+        System.out.println("address: " + this.getAddress());
+        System.out.println("work status: " + status);
+        System.out.println("name Bank: " + bank.getName());
+        System.out.println("name employee: " + servicingEmployee.getFullName());
+        System.out.println("is dispensing cash: " + canDispenseMoney);
+        System.out.println("can deposit allowed: " + canAcceptMoney);
+        System.out.println("total money in the bank ATM: " + moneyInAtm);
+        System.out.println("atm maintenance cost: " + serviceCost);
+        System.out.println();
+    }
+
 }

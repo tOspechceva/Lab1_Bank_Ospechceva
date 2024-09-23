@@ -32,6 +32,7 @@ public class Bank implements BankService {
     private double totalMoney;
     private double interestRate;
 
+
     // Конструктор
 
     public Bank() {

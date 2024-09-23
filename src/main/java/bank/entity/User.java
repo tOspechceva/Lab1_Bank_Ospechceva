@@ -122,7 +122,14 @@ public class User {
     }
 
     public void setBanks(List<Bank> banks) {
-        this.banks = banks;
+        for (Bank bank : banks) {
+            this.setBank(bank);
+        }
+    }
+
+    public void setBank(Bank bank) {
+        bank.addClient();
+        this.banks.add(bank);
     }
 
     public List<CreditAccount> getCreditAccounts() {
