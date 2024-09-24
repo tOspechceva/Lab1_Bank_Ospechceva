@@ -1,7 +1,11 @@
 package bank.entity;
+
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import bank.service.impl.UserService;
 
 //User – объект клиенты банка, содержит поля:
 //• Id клиента
@@ -16,9 +20,8 @@ import java.util.Random;
 //ежемесячного дохода, от меньше 1 000 – 100, от 1 000 до 2 000 – 200 и т.д.
 //вплоть до 10 000)
 
-public class User {
+public class User implements UserService {
     private Long id;
-
     private String fullName;  // ФИО
     private Date birthDate;  // Дата рождения
     private String workplace;  // Место работы
@@ -72,79 +75,113 @@ public class User {
     }
 
     // Геттеры и сеттеры
+    @Override
     public Long getId() {
         return id;
     }
+
+    @Override
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public String getFullName() {
         return fullName;
     }
 
+    @Override
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
 
+    @Override
     public Date getBirthDate() {
         return birthDate;
     }
 
+    @Override
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
+    @Override
     public String getWorkplace() {
         return workplace;
     }
 
+    @Override
     public void setWorkplace(String workplace) {
         this.workplace = workplace;
     }
 
+    @Override
     public double getMonthlyIncome() {
         return monthlyIncome;
     }
 
+    @Override
     public void setMonthlyIncome(double monthlyIncome) {
         this.monthlyIncome = monthlyIncome;
         this.creditRating = calculateCreditRating(monthlyIncome);
     }
 
+    @Override
     public int getCreditRating() {
         return creditRating;
     }
 
+    @Override
     public List<Bank> getBanks() {
         return banks;
     }
 
+    @Override
     public void setBanks(List<Bank> banks) {
         for (Bank bank : banks) {
             this.setBank(bank);
         }
     }
 
+    @Override
     public void setBank(Bank bank) {
         bank.addClient();
         this.banks.add(bank);
     }
 
+    @Override
     public List<CreditAccount> getCreditAccounts() {
         return creditAccounts;
     }
 
+    @Override
     public void setCreditAccounts(List<CreditAccount> creditAccounts) {
         this.creditAccounts = creditAccounts;
     }
 
+    @Override
     public List<PaymentAccount> getPaymentAccounts() {
         return paymentAccounts;
     }
 
+    @Override
     public void setPaymentAccounts(List<PaymentAccount> paymentAccounts) {
         this.paymentAccounts = paymentAccounts;
+    }
+
+    @Override
+    public void printUser() {
+        System.out.println("User");
+        System.out.println("id=" + id);
+        System.out.println("full name=" + fullName);
+        System.out.println("date of birth=" + birthDate);
+        System.out.println("place of work=" + workplace);
+        System.out.println("salary amount=" + monthlyIncome);
+        System.out.println("array of id banks=" + Arrays.toString(banks.toArray()));
+        System.out.println("array of id credit accounts=" + Arrays.toString(creditAccounts.toArray()));
+        System.out.println("array of id payment accounts=" + Arrays.toString(paymentAccounts.toArray()));
+        System.out.println("credit rating for bank=" + creditRating);
+        System.out.println();
     }
 }

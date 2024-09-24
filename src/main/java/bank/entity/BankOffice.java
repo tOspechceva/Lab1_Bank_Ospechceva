@@ -1,5 +1,6 @@
 package bank.entity;
 
+import bank.service.impl.BankOfficeService;
 //BankOffice – объект офис банка, содержит поля:
 //• Id банковского офиса
 //• Название офиса
@@ -15,7 +16,7 @@ package bank.entity;
 //в банке)
 //• Стоимость аренды банковского офиса
 
-public class BankOffice {
+public class BankOffice implements BankOfficeService {
     private Long id;
     private String name;  // Название офиса
 
@@ -56,34 +57,42 @@ public class BankOffice {
     }
 
     // Геттеры и сеттеры
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public String getAddress() {
         return address;
     }
 
+    @Override
     public void setAddress(String address) {
         this.address = address;
     }
 
+    @Override
     public String getStatus() {
         return status;
     }
 
+    @Override
     public void setStatus(String status) {
         if (status.equals("Работает") || status.equals("Не работает"))
             this.status = status;
@@ -91,67 +100,79 @@ public class BankOffice {
             System.out.println("The status is not correct in the office.");
     }
 
+    @Override
     public boolean isCanPlaceAtm() {
         return canPlaceAtm;
     }
 
+    @Override
     public void setCanPlaceAtm(boolean canPlaceAtm) {
         this.canPlaceAtm = canPlaceAtm;
         if (!canPlaceAtm)
             this.atmCount = 0;
     }
 
+    @Override
     public int getAtmCount() {
         return atmCount;
     }
 
+    @Override
     public void setAtmCount(int atmCount) {
-        if(this.isCanPlaceAtm()) {
-            if (atmCount <=  this.bank.getAtmCount())
+        if (this.isCanPlaceAtm()) {
+            if (atmCount <= this.bank.getAtmCount())
                 this.atmCount = atmCount;
             else
                 System.out.println("The bank doesn't have that many vending machines");
-        }else {
+        } else {
             this.atmCount = 0;
             if (atmCount != 0)
                 System.out.println("You cannot place a bank in this office");
         }
     }
 
+    @Override
     public void addAtmCount() {
         this.atmCount++;
         this.bank.addAtm();
     }
 
-
+    @Override
     public boolean isCanProvideLoan() {
         return canProvideLoan;
     }
 
+    @Override
     public void setCanProvideLoan(boolean canProvideLoan) {
         this.canProvideLoan = canProvideLoan;
     }
 
+    @Override
     public boolean isCanDispenseMoney() {
         return canDispenseMoney;
     }
 
+    @Override
     public void setCanDispenseMoney(boolean canDispenseMoney) {
         this.canDispenseMoney = canDispenseMoney;
     }
 
+    @Override
     public boolean isCanAcceptMoney() {
         return canAcceptMoney;
     }
 
+    @Override
     public void setCanAcceptMoney(boolean canAcceptMoney) {
         this.canAcceptMoney = canAcceptMoney;
     }
 
+    @Override
     public double getMoneyInOffice() {
         return moneyInOffice;
     }
 
+    @Override
     public void setMoneyInOffice(double moneyInOffice) {
         if (moneyInOffice <= this.bank.getTotalMoney())
             this.moneyInOffice = moneyInOffice;
@@ -159,23 +180,28 @@ public class BankOffice {
             System.out.println("There is not that much money in the bank");
     }
 
+    @Override
     public double getRentCost() {
         return rentCost;
     }
 
+    @Override
     public void setRentCost(double rentCost) {
         this.rentCost = rentCost;
     }
 
+    @Override
     public Bank getBank() {
         return bank;
     }
 
+    @Override
     public void setBank(Bank bank) {
         bank.addOffice();
         this.bank = bank;
     }
 
+    @Override
     public void printBankOffice() {
         System.out.println("Bank office " + name);
         System.out.println("id: " + id);

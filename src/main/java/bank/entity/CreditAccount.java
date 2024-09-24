@@ -1,6 +1,9 @@
 package bank.entity;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
+
+import bank.service.impl.CreditAccountService;
 //CreditAccount – объект кредитный счет, содержит поля:
 //• Id кредитного счета
 //• Пользователь, за которым закреплен этот кредитный счет
@@ -16,118 +19,159 @@ import java.time.LocalDate;
 //• Платежный счет в банке с которого будет осуществляться погашение
 //данного кредита
 
-public class CreditAccount {
+
+public class CreditAccount implements CreditAccountService {
 
     private Long id;
-
-
     private User user;  // Пользователь, за которым закреплен этот кредитный счет
-
-
     private Bank bank;  // Банк, где взят кредит
-
     private LocalDate startDate;  // Дата начала кредита
     private LocalDate endDate;    // Дата окончания кредита
     private int loanMonths;       // Количество месяцев, на которые взят кредит
-
     private BigDecimal loanAmount;        // Сумма кредита
     private BigDecimal monthlyPayment;    // Ежемесячный платеж
-
     private double interestRate;  // Процентная ставка, должна быть равна ставке банка или ниже
-
     private Employee issuingEmployee;  // Сотрудник, который выдал кредит
-
     private PaymentAccount paymentAccount;  // Платежный счет для погашения кредита
 
     // Конструкторы
-    public CreditAccount() {}
+    public CreditAccount() {
+    }
 
     // Геттеры и сеттеры
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
+    @Override
     public User getUser() {
         return user;
     }
 
+    @Override
     public void setUser(User user) {
         this.user = user;
     }
 
+    @Override
     public Bank getBank() {
         return bank;
     }
 
+    @Override
     public void setBank(Bank bank) {
         this.bank = bank;
     }
 
+    @Override
     public LocalDate getStartDate() {
         return startDate;
     }
 
+    @Override
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
+    @Override
     public LocalDate getEndDate() {
         return endDate;
     }
 
+    @Override
     public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+        if (endDate.isAfter(this.startDate))
+            this.endDate = endDate;
+        else {
+            System.out.println("End date is before start date");
+        }
     }
 
+    @Override
     public int getLoanMonths() {
         return loanMonths;
     }
 
+    @Override
     public void setLoanMonths(int loanMonths) {
-        this.loanMonths = loanMonths;
+        if (loanMonths > 0)
+            this.loanMonths = loanMonths;
+        else
+            System.out.println("Loan Months is invalid");
     }
 
+    @Override
     public BigDecimal getLoanAmount() {
         return loanAmount;
     }
 
+    @Override
     public void setLoanAmount(BigDecimal loanAmount) {
         this.loanAmount = loanAmount;
     }
 
+    @Override
     public BigDecimal getMonthlyPayment() {
         return monthlyPayment;
     }
 
+    @Override
     public void setMonthlyPayment(BigDecimal monthlyPayment) {
         this.monthlyPayment = monthlyPayment;
     }
 
+    @Override
     public double getInterestRate() {
         return interestRate;
     }
 
+    @Override
     public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
+        if (interestRate <= this.bank.getInterestRate())
+            this.interestRate = interestRate;
+        else
+            System.out.println("Interest rate is invalid");
     }
 
+    @Override
     public Employee getIssuingEmployee() {
         return issuingEmployee;
     }
 
+    @Override
     public void setIssuingEmployee(Employee issuingEmployee) {
         this.issuingEmployee = issuingEmployee;
     }
 
+    @Override
     public PaymentAccount getPaymentAccount() {
         return paymentAccount;
     }
 
+    @Override
     public void setPaymentAccount(PaymentAccount paymentAccount) {
         this.paymentAccount = paymentAccount;
+    }
+
+    @Override
+    public void printCreditAccount() {
+        System.out.println("CreditAccount");
+        System.out.println("id=" + id);
+        System.out.println("User=" + user.getFullName());
+        System.out.println("Bank=" + bank.getName());
+        System.out.println("loanStartDate='" + startDate + '\'');
+        System.out.println("loanEndDate='" + endDate + '\'');
+        System.out.println("loanLongInMonths= " + loanMonths);
+        System.out.println("creditAmount= " + loanAmount);
+        System.out.println("monthlyPayment= " + monthlyPayment);
+        System.out.println("interestRate= " + interestRate);
+        System.out.println("Employee= " + issuingEmployee.getFullName());
+        System.out.println("PaymentAccount=" + paymentAccount.getId());
+        System.out.println();
     }
 }
