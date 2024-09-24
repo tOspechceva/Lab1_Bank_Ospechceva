@@ -35,7 +35,20 @@ public class CreditAccount implements CreditAccountService {
     private PaymentAccount paymentAccount;  // Платежный счет для погашения кредита
 
     // Конструкторы
-    public CreditAccount() {
+    public CreditAccount(Long id, User user, Bank bank , LocalDate startDate, LocalDate endDate, int loanMonths,
+                         BigDecimal loanAmount, BigDecimal monthlyPayment, double interestRate,
+                         Employee issuingEmployee, PaymentAccount paymentAccount) {
+        this.setId(id);
+        this.setUser(user);
+        this.setBank(bank);
+        this.setStartDate(startDate);
+        this.setEndDate(endDate);
+        this.setLoanMonths(loanMonths);
+        this.setLoanAmount(loanAmount);
+        this.setMonthlyPayment(monthlyPayment);
+        this.setInterestRate(interestRate);
+        this.setIssuingEmployee(issuingEmployee);
+        this.setPaymentAccount(paymentAccount);
     }
 
     // Геттеры и сеттеры

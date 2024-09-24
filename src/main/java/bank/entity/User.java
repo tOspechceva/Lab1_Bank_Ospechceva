@@ -27,20 +27,19 @@ public class User implements UserService {
     private String workplace;  // Место работы
     private double monthlyIncome;  // Ежемесячный доход (рандомно, не более 10 000)
     private int creditRating;  // Кредитный рейтинг (исходя из дохода)
-
-
     private List<Bank> banks;  // Банки, которыми пользуется клиент
-
-
     private List<CreditAccount> creditAccounts;  // Кредитные счета (по умолчанию пусто)
-
-
     private List<PaymentAccount> paymentAccounts;  // Платежные счета (по умолчанию пусто)
 
     // Конструктор
-    public User() {
-        this.monthlyIncome = generateRandomIncome();
+    public User(Long id, String fullName,
+                Date birthDate, String workplace) {
+        this.setMonthlyIncome(generateRandomIncome());
         this.creditRating = calculateCreditRating(this.monthlyIncome);
+        this.setId(id);
+        this.setFullName(fullName);
+        this.setBirthDate(birthDate);
+        this.setWorkplace(workplace);
     }
 
     // Генерация рандомного дохода

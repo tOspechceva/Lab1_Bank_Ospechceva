@@ -16,7 +16,11 @@ public class PaymentAccount implements PaymentAccountService {
     private double balance = 0.0;// Сумма на счету (по умолчанию 0)
 
     // Конструктор
-    public PaymentAccount() {
+    public PaymentAccount(Long id, User user, Bank bank, double balance ) {
+        this.setId(id);
+        this.setUser(user);
+        this.setBank(bank);
+        this.setBalance(balance);
     }
 
     public PaymentAccount(User user, Bank bank, double balance) {

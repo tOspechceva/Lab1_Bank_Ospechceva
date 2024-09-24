@@ -26,7 +26,18 @@ public class Employee implements EmployeeService {
     private BankOffice bankOffice;  // В каком офисе работает (если не удаленно)
 
     // Конструктор
-    public Employee() {
+    public Employee(Long id, String fullName, Date birthDate, String position,
+                    boolean worksRemotely, boolean canIssueLoans, double salary,
+                    Bank bank, BankOffice bankOffice) {
+        this.setId(id);
+        this.setFullName(fullName);
+        this.setBirthDate(birthDate);
+        this.setPosition(position);
+        this.setWorksRemotely(worksRemotely);
+        this.setCanIssueLoans(canIssueLoans);
+        this.setSalary(salary);
+        this.setBank(bank);
+        this.setBankOffice(bankOffice);
     }
 
     // Геттеры и сеттеры
