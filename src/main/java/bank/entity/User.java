@@ -1,24 +1,12 @@
 package bank.entity;
 
-import java.util.Arrays;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Random;
 
 import bank.service.impl.UserService;
 
-//User – объект клиенты банка, содержит поля:
-//• Id клиента
-//• ФИО
-//• Дата рождения
-//• Место работы
-//• Ежемесячный доход (генерируется рандомно, но не более 10 000)
-//• Банки, которыми он пользуется
-//• Кредитные счета (по умолчанию пусто)
-//• Платежные счета (по умолчанию пусто)
-//• Кредитный рейтинг для банка (генерируется рандомно исходя из
-//ежемесячного дохода, от меньше 1 000 – 100, от 1 000 до 2 000 – 200 и т.д.
-//вплоть до 10 000)
+
 
 public class User implements UserService {
     private Long id;

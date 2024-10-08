@@ -2,11 +2,7 @@ package bank.entity;
 
 import bank.service.impl.PaymentAccountService;
 
-//PaymentAccount – объект платежный счет, содержит поля:
-//• Id платёжного счета.
-//• Пользователь, за которым закреплен этот платежный счет.
-//• Название банка, в котором открыт этот счет.
-//• Сумма, которая лежит в данный момент на счету (по умолчанию 0)
+
 
 public class PaymentAccount implements PaymentAccountService {
 

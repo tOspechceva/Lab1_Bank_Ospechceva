@@ -1,19 +1,8 @@
 package bank.entity;
 
-import java.util.Date;
-
 import bank.service.impl.EmployeeService;
 
-//Employee – объект сотрудник, содержит поля:
-//• Id сотрудника.
-//• ФИО.
-//• Дата рождения.
-//• Должность.
-//• В каком банке работает.
-//• Работает ли в банковском офисе или удаленно? (да/нет)
-//• Банковский офис, в котором работает.
-//• Может ли выдавать кредиты? (да/нет)
-//• Размер зарплаты.
+
 public class Employee implements EmployeeService {
     private Long id;
     private String fullName;  // ФИО
