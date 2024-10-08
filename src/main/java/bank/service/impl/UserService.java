@@ -16,9 +16,9 @@ public interface UserService {
 
     void setFullName(String fullName);
 
-    Date getBirthDate();
+    String getBirthDate();
 
-    void setBirthDate(Date birthDate);
+    void setBirthDate(String birthDate);
 
     String getWorkplace();
 

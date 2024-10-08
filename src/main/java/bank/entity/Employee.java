@@ -17,7 +17,7 @@ import bank.service.impl.EmployeeService;
 public class Employee implements EmployeeService {
     private Long id;
     private String fullName;  // ФИО
-    private Date birthDate;  // Дата рождения
+    private String birthDate;  // Дата рождения
     private String position;  // Должность
     private boolean worksRemotely;  // Работает ли удаленно (да/нет)
     private boolean canIssueLoans;  // Может ли выдавать кредиты (да/нет)
@@ -26,7 +26,7 @@ public class Employee implements EmployeeService {
     private BankOffice bankOffice;  // В каком офисе работает (если не удаленно)
 
     // Конструктор
-    public Employee(Long id, String fullName, Date birthDate, String position,
+    public Employee(Long id, String fullName, String birthDate, String position,
                     boolean worksRemotely, boolean canIssueLoans, double salary,
                     Bank bank, BankOffice bankOffice) {
         this.setId(id);
@@ -62,12 +62,12 @@ public class Employee implements EmployeeService {
     }
 
     @Override
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
     @Override
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

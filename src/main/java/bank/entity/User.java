@@ -23,7 +23,7 @@ import bank.service.impl.UserService;
 public class User implements UserService {
     private Long id;
     private String fullName;  // ФИО
-    private Date birthDate;  // Дата рождения
+    private String birthDate;  // Дата рождения
     private String workplace;  // Место работы
     private double monthlyIncome;  // Ежемесячный доход (рандомно, не более 10 000)
     private int creditRating;  // Кредитный рейтинг (исходя из дохода)
@@ -33,7 +33,7 @@ public class User implements UserService {
 
     // Конструктор
     public User(Long id, String fullName,
-                Date birthDate, String workplace) {
+                String birthDate, String workplace) {
         this.setMonthlyIncome(generateRandomIncome());
         this.creditRating = calculateCreditRating(this.monthlyIncome);
         this.setId(id);
@@ -96,12 +96,12 @@ public class User implements UserService {
     }
 
     @Override
-    public Date getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
     @Override
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -177,9 +177,6 @@ public class User implements UserService {
         System.out.println("date of birth=" + birthDate);
         System.out.println("place of work=" + workplace);
         System.out.println("salary amount=" + monthlyIncome);
-        System.out.println("array of id banks=" + Arrays.toString(banks.toArray()));
-        System.out.println("array of id credit accounts=" + Arrays.toString(creditAccounts.toArray()));
-        System.out.println("array of id payment accounts=" + Arrays.toString(paymentAccounts.toArray()));
         System.out.println("credit rating for bank=" + creditRating);
         System.out.println();
     }

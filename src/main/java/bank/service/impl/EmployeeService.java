@@ -14,9 +14,9 @@ public interface EmployeeService {
 
     public void setFullName(String fullName);
 
-    public Date getBirthDate();
+    public String getBirthDate();
 
-    public void setBirthDate(Date birthDate);
+    public void setBirthDate(String birthDate);
 
     public String getPosition();
 
