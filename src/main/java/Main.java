@@ -20,7 +20,9 @@ public class Main {
 
 
         bank.printBank();
+
         office.printBankOffice();
+
         employee.printEmployee();
         atm.printBankAtm();
         user.printUser();
